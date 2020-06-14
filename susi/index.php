@@ -34,8 +34,13 @@ if (isset($_POST["course"])) {
     }
 }
 
-$csrfToken = md5(openssl_random_pseudo_bytes(32));
-setcookie("csrf_token", $csrfToken, time() + 3600 * 24);
+if (isset($_COOKIE["csrf_token"])) {
+    $csrfToken = htmlspecialchars($_COOKIE["csrf_token"], ENT_QUOTES);
+} else {
+    $csrfToken = md5(openssl_random_pseudo_bytes(32));
+    setcookie("csrf_token", $csrfToken, time() + 3600 * 24);
+}
+
 
 ?>
 
