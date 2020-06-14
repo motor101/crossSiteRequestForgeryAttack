@@ -2,6 +2,11 @@
 
 session_start();
 
+function saveCourse($username, $course)
+{
+    // save the chosen course in the database
+}
+
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
     exit;
@@ -12,13 +17,14 @@ if (isset($_SESSION["course"])) {
     exit;
 }
 
-$availableCourses = ["Алгебра", "ОСУП","3D принтиране"];
+$availableCourses = ["Алгебра", "ОСУП", "3D принтиране"];
 
 if (isset($_POST["course"])) {
     if (in_array($_POST["course"], $availableCourses)) {
         $_SESSION["course"] = $_POST["course"];
+        saveCourse($_SESSION["username"], $_SESSION["course"]);
         header("Location: courses.php");
-        exit();
+        exit;
     }
 }
 
@@ -37,7 +43,7 @@ if (isset($_POST["course"])) {
 </head>
 <body>
 <h1>Здравейте, <?= htmlspecialchars($_SESSION["username"]) ?></h1>
-<h2>Моля, запишете се за един от следните курсове</h2>
+<h2>Моля, запишете се за един от следните курсове.</h2>
 <h2>Не можете да променяте избора си т. ч. помислете внимателно какво ви се учи.</h2>
 <br>
 <form method="post">

