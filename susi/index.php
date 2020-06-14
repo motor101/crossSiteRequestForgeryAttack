@@ -20,6 +20,12 @@ if (isset($_SESSION["course"])) {
 $availableCourses = ["Алгебра", "ОСУП", "3D принтиране"];
 
 if (isset($_POST["course"])) {
+
+    if (!isset($_POST["csrf_token"]) || !isset($_COOKIE["csrf_token"])
+        || $_POST["csrf_token"] !== $_COOKIE["csrf_token"]) {
+        exit;
+    }
+
     if (in_array($_POST["course"], $availableCourses)) {
         $_SESSION["course"] = $_POST["course"];
         saveCourse($_SESSION["username"], $_SESSION["course"]);
@@ -27,6 +33,9 @@ if (isset($_POST["course"])) {
         exit;
     }
 }
+
+$csrfToken = md5(openssl_random_pseudo_bytes(32));
+setcookie("csrf_token", $csrfToken, time() + 3600 * 24);
 
 ?>
 
@@ -50,6 +59,7 @@ if (isset($_POST["course"])) {
     <input type="radio" name="course" value="Алгебра">Алгебра<br>
     <input type="radio" name="course" value="ОСУП">ОСУП<br>
     <input type="radio" name="course" value="3D принтиране">3D принтиране<br><br>
+    <input type="text" name="csrf_token" value="<?= $csrfToken ?>" hidden>
     <input type="submit" value="Запази избора ми">
 </form>
 <br>
